@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class User extends Model {}
 
-User.init(
+Todo.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -11,34 +11,15 @@ User.init(
         primaryKey: true,
         autoIncrement: true
       },
-      username: {
+      todo_text: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true
-        }
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [4]
-        }
-      },
-      first_name: {
-        type: DataTypes.STRING,
+      is_completed: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
       },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      remember_token: {
+      user_id: {
         type: DataTypes.STRING,
         allowNull: false
       },
