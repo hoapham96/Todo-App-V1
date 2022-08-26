@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Todo } = require('../../models');
-const router = require('express').Router();
+const withAuth = require('../../middlewares/auth')
 
 // POST /todos
 router.post('/todos', async (req, res) => {
@@ -72,5 +72,6 @@ router.delete('/todos/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     };
 });
+
 
 module.exports = router;

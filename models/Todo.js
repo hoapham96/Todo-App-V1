@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class User extends Model {}
+class Todo extends Model {}
 
 Todo.init(
     {
@@ -20,8 +20,11 @@ Todo.init(
         allowNull: false
       },
       user_id: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id'
+        }
       },
       created_at: {
         type: DataTypes.DATE,
@@ -38,8 +41,8 @@ Todo.init(
       timestamps: false,
       freezeTableName: true,
       underscored: true,
-      modelName: 'user'
+      modelName: 'todo'
     }
   );
 
-module.exports = User;
+module.exports = Todo;
