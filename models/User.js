@@ -38,10 +38,6 @@ User.init(
         type: DataTypes.STRING,
         allowNull: false
       },
-      remember_token: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
       created_at: {
         type: DataTypes.DATE,
       },

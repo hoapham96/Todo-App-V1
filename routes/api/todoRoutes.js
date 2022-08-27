@@ -3,14 +3,13 @@ const { Todo } = require('../../models');
 const withAuth = require('../../middlewares/auth')
 
 // POST /todos
-router.post('/todos', async (req, res) => {
+router.post('/todos', withAuth, async (req, res) => {
     try {
         const createdTodo = await Todo.create({
             todo_text: req.body.todo_text,
             is_completed: req.body.is_completed,
             created_at: new Date()
         })
-        console.log(createdTodo);
         res.json(createdTodo)
     } catch(err) {
         console.log(err);
@@ -24,7 +23,7 @@ router.get('/todos', withAuth, async (req, res) => {
     try {
         const todo = await Todo.findAll({
             where: {
-                user_id: req.session.user_id
+                user_id: req.user.id
             }
         })
         console.log(todo);
@@ -45,7 +44,7 @@ router.put('/todos/:id', withAuth, async (req, res) => {
             updated_at: new Date(),
             }, {
             where: {
-                user_id: req.session.user_id,
+                user_id: req.user.id,
                 id: req.params.id
             }
         });
@@ -62,7 +61,7 @@ router.delete('/todos/:id', withAuth, async (req, res) => {
     try {
         await Todo.destroy({
         where: {
-            user_id: req.session.user_id,
+            user_id: req.user.id,
             id: req.params.id
         }
       });
